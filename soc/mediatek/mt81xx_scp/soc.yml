@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Mediatek
+# SPDX-License-Identifier: Apache-2.0
+
+family:
+  - name: mt81xx_scp
+    series:
+      - name: mt81xx_scp
+        socs:
+          - name: mt8196_scp

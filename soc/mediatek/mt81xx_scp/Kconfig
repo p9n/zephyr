@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Mediatek
+# SPDX-License-Identifier: Apache-2.0
+
+config MEDIATEK_SCP_PROGRAM_LOAD_ADDRESS
+	hex "Program load address"
+	default 0x1C800000
+	help
+	  Physical memory address where the host AP loads the SCP firmware image.

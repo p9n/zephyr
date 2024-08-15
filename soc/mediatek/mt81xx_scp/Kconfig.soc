@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Mediatek
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_MT81XX_SCP
+	bool
+
+config SOC_SERIES_MT81XX_SCP
+	bool
+	select SOC_FAMILY_MT81XX_SCP
+
+config SOC_MT8196_SCP
+	bool
+	select RISCV
+	select RISCV_PRIVILEGED
+	select SOC_SERIES_MT81XX_SCP
+	select ATOMIC_OPERATIONS_C
+
+config SOC_FAMILY
+	default "mt81xx_scp"
+
+config SOC_SERIES
+	default "mt81xx_scp"
+
+config SOC
+	default "mt8196_scp" if SOC_MT8196_SCP
