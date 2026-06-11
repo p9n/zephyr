@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Mediatek
+# SPDX-License-Identifier: Apache-2.0
+
+description: MediaTek SCP Timer
+
+compatible: "mediatek,mtk-scp-timer"
+
+include: base.yaml
+
+properties:
+  reg:
+    required: true
+  interrupts:
+    required: true
