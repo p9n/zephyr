@@ -1,0 +1,81 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (c) 2026 Mediatek
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#ifndef ZEPHYR_DRIVERS_TIMER_MTK_SCP_TIMER_H_
+#define ZEPHYR_DRIVERS_TIMER_MTK_SCP_TIMER_H_
+
+#define TIMER_IN_CLK (CLK_CTRL_BASE + 0x30)
+
+#ifdef CFG_AMP_CORE1_EN
+#define XGPT_BASE_REG (SCP_TIMER_CORE0_BASE + uxPortGetCoreId() * 0x10000)
+#define GENERAL_CTRL  (CORE0_GENERAL_CTRL + uxPortGetCoreId() * 0x10000)
+#else
+#define XGPT_BASE_REG (SCP_TIMER_CORE0_BASE)
+#define GENERAL_CTRL  (CORE0_GENERAL_CTRL)
+#endif
+
+#define SCP_TIMER_BASE DT_REG_ADDR(DT_NODELABEL(ostimer))
+
+#define TIMER_CPU_TICK_EN         (SCP_TIMER_BASE + 0x68)
+#define TIMER_CPU_TICK_RST_VAL    (SCP_TIMER_BASE + 0x6c)
+#define TIMER_CPU_TICK_CUR_VAL    (SCP_TIMER_BASE + 0x70)
+#define TIMER_CPU_TICK_IRQ_CTRL   (SCP_TIMER_BASE + 0x74)
+#define TIMERCPU_TICK_IRQ_CLR     (1 << 5)
+#define TIMER_CPU_TICK_IRQ_STATUS (1 << 4)
+#define TIMER_CPU_TICK_IRQ_EN     (1 << 0)
+
+#define OSTIMER_CON             (SCP_TIMER_BASE + 0x80)
+#define OSTIMER_INIT_L          (SCP_TIMER_BASE + 0x84)
+#define OSTIMER_INIT_H          (SCP_TIMER_BASE + 0x88)
+#define OSTIMER_CUR_L           (SCP_TIMER_BASE + 0x8C)
+#define OSTIMER_CUR_H           (SCP_TIMER_BASE + 0x90)
+#define OSTIMER_TVAL            (SCP_TIMER_BASE + 0x94)
+#define OSTIMER_IRQ_ACK         (SCP_TIMER_BASE + 0x98)
+#define OSTIMER_TICK_IRQ_CLR    (1 << 5)
+#define OSTIMER_TICK_IRQ_STATUS (1 << 4)
+#define OSTIMER_TICK_IRQ_EN     (1 << 0)
+
+#define OS_TIMER_LATCH_CTRL        (SCP_TIMER_BASE + 0xA0)
+#define OS_TIMER_LATCH_VALUE_0     (SCP_TIMER_BASE + 0xA4)
+#define OS_TIMER_LATCH_VALUE_0_MSB (SCP_TIMER_BASE + 0xA8)
+#define OS_TIMER_LATCH_VALUE_1     (SCP_TIMER_BASE + 0xAC)
+#define OS_TIMER_LATCH_VALUE_1_MSB (SCP_TIMER_BASE + 0xB0)
+#define OS_TIMER_LATCH_VALUE_2     (SCP_TIMER_BASE + 0xB4)
+#define OS_TIMER_LATCH_VALUE_2_MSB (SCP_TIMER_BASE + 0xB8)
+#define OS_TIMER_LATCH_EDGE_EN     (SCP_TIMER_BASE + 0xE0)
+
+/* AP side system counter frequency is 13MHz*/
+#ifdef CFG_FPGA
+#define AP_NS_PER_CNT ((1000000000UL) / (6000000UL))
+#else
+#define AP_NS_PER_CNT ((1000000000UL) / (13000000UL))
+#endif
+
+#define TIMER_EN          (SCP_TIMER_BASE + 0x00)
+#define TIMER_RST_VAL     (SCP_TIMER_BASE + 0x04)
+#define TIMER_IRQ_CTRL    (SCP_TIMER_BASE + 0x0c)
+#define TIMER_CLK_SEL_REG (SCP_TIMER_BASE + 0x40)
+
+
+#define TIMER_ENABLE  1
+#define TIMER_DISABLE 0
+
+#define TIMER_IRQ_ENABLE  1
+#define TIMER_IRQ_DISABLE 0
+
+#define TIMER_IRQ_STA   (0x1 << 4)
+#define TIMER_IRQ_CLEAR (0x1 << 5)
+
+/* TODO: Check this setting */
+#define TIMER_CLK_SRC_CLK_32K (0x00)
+#define TIMER_CLK_SRC_CLK_26M (0x01)
+#define TIMER_CLK_SRC_BCLK    (0x02)
+#define TIMER_CLK_SRC_PCLK    (0x03)
+
+#define TIMER_CLK_SRC_MASK  0x3
+#define TIMER_CLK_SRC_SHIFT 4
+
+#endif /* ZEPHYR_DRIVERS_TIMER_MTK_SCP_TIMER_H_ */

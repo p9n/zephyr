@@ -54,6 +54,13 @@
 		interrupt-parent = <&hlic>;
 	};
 
+	ostimer: timer@70033000 {
+		compatible = "mediatek,mtk-scp-timer";
+		reg = <0x70033000 0x1000>;
+		interrupt-parent = <&intc>;
+		interrupts = <15 0 4>;
+	};
+
 	ram0: memory@0 {
 		device_type = "memory";
 		reg = <0x0 0x360000>;

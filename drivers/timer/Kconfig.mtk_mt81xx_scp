@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Mediatek
+# SPDX-License-Identifier: Apache-2.0
+
+config MEDIATEK_MT81XX_SCP_TIMER
+	bool "MEDIATEK MT81XX SCP timer driver"
+	default y
+	depends on DT_HAS_MEDIATEK_MTK_SCP_TIMER_ENABLED
+	select TIMER_HAS_64BIT_CYCLE_COUNTER
+	help
+	  This module implements a kernel device driver for the mt81xx SCP
+	  HW timer model
