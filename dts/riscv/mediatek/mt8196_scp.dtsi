@@ -31,12 +31,31 @@
 			riscv,isa-base = "rv32i";
 			riscv,isa-extensions = "i", "m", "a", "f", "d", "c", "zicsr", "zifencei";
 			clock-frequency = <DT_FREQ_M(13)>;
+
+			hlic: interrupt-controller {
+				compatible = "riscv,cpu-intc";
+				#address-cells = <0>;
+				#interrupt-cells = <1>;
+				interrupt-controller;
+			};
 		};
 
 	};
+
+	intc: interrupt-controller@70032000 {
+		compatible = "mediatek,scp-intc";
+		reg = <0x70032000 0x1000>, <0x79000000 0x400000>;
+		reg-names = "intc", "plic";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		interrupt-controller;
+		#interrupt-cells = <3>;
+		interrupts = <11>;
+		interrupt-parent = <&hlic>;
+	};
+
 	ram0: memory@0 {
 		device_type = "memory";
 		reg = <0x0 0x360000>;
 	};
-
 };

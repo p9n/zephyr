@@ -18,6 +18,10 @@
 #include <zephyr/drivers/interrupt_controller/riscv_aia.h>
 #endif
 
+#if defined(CONFIG_INTC_MTK_SCP)
+#include <zephyr/drivers/interrupt_controller/mtk_scp_intc.h>
+#endif
+
 #if defined(CONFIG_RISCV_HAS_CLIC)
 
 void arch_irq_enable(unsigned int irq)
@@ -53,7 +57,7 @@ void z_riscv_irq_vector_set(unsigned int irq)
 
 void arch_irq_enable(unsigned int irq)
 {
-#if defined(CONFIG_RISCV_HAS_PLIC) || defined(CONFIG_RISCV_HAS_AIA)
+#if defined(CONFIG_RISCV_HAS_PLIC) || defined(CONFIG_RISCV_HAS_AIA) || defined(CONFIG_INTC_MTK_SCP)
 	unsigned int level = irq_get_level(irq);
 #endif
 
@@ -65,6 +69,11 @@ void arch_irq_enable(unsigned int irq)
 #elif defined(CONFIG_RISCV_HAS_AIA)
 	if (level == 2) {
 		riscv_aia_irq_enable(irq);
+		return;
+	}
+#elif defined(CONFIG_INTC_MTK_SCP)
+	if (level == 2) {
+		mtk_scp_intc_irq_enable(irq);
 		return;
 	}
 #endif
@@ -96,7 +105,7 @@ void arch_irq_enable(unsigned int irq)
 
 void arch_irq_disable(unsigned int irq)
 {
-#if defined(CONFIG_RISCV_HAS_PLIC) || defined(CONFIG_RISCV_HAS_AIA)
+#if defined(CONFIG_RISCV_HAS_PLIC) || defined(CONFIG_RISCV_HAS_AIA) || defined(CONFIG_INTC_MTK_SCP)
 	unsigned int level = irq_get_level(irq);
 #endif
 
@@ -108,6 +117,11 @@ void arch_irq_disable(unsigned int irq)
 #elif defined(CONFIG_RISCV_HAS_AIA)
 	if (level == 2) {
 		riscv_aia_irq_disable(irq);
+		return;
+	}
+#elif defined(CONFIG_INTC_MTK_SCP)
+	if (level == 2) {
+		mtk_scp_intc_irq_disable(irq);
 		return;
 	}
 #endif
@@ -141,7 +155,7 @@ int arch_irq_is_enabled(unsigned int irq)
 {
 	uint32_t ie;
 
-#if defined(CONFIG_RISCV_HAS_PLIC) || defined(CONFIG_RISCV_HAS_AIA)
+#if defined(CONFIG_RISCV_HAS_PLIC) || defined(CONFIG_RISCV_HAS_AIA) || defined(CONFIG_INTC_MTK_SCP)
 	unsigned int level = irq_get_level(irq);
 #endif
 
@@ -152,6 +166,10 @@ int arch_irq_is_enabled(unsigned int irq)
 #elif defined(CONFIG_RISCV_HAS_AIA)
 	if (level == 2) {
 		return riscv_aia_irq_is_enabled(irq);
+	}
+#elif defined(CONFIG_INTC_MTK_SCP)
+	if (level == 2) {
+		return mtk_scp_intc_irq_is_enabled(irq);
 	}
 #endif
 
