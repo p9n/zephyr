@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Mediatek
+# SPDX-License-Identifier: Apache-2.0
+
+config INTC_MTK_SCP
+	bool "MediaTek SCP Interrupt Controller"
+	default y
+	depends on DT_HAS_MEDIATEK_SCP_INTC_ENABLED
+	select MULTI_LEVEL_INTERRUPTS
+	select 2ND_LEVEL_INTERRUPTS
+	help
+	  Enable support for the MediaTek SCP Interrupt Controller.
