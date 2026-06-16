@@ -13,6 +13,12 @@
 	#address-cells = < 0x01 >;
 	#size-cells = < 0x01 >;
 
+	uart0: uart@70026000 {
+		compatible = "mediatek,mrv55-uart";
+		reg = <0x70026000 0x1000>;
+		current-speed = <115200>;
+		clock-frequency = <DT_FREQ_M(26)>;
+	};
 	cpus {
 		#address-cells = < 0x01 >;
 		#size-cells = < 0x00 >;

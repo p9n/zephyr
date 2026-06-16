@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Mediatek
+# SPDX-License-Identifier: Apache-2.0
+
+config UART_MTK_MT81XX_SCP
+	bool "MTK MT81xx SCP UART driver"
+	default y
+	select SERIAL_HAS_DRIVER
+	depends on DT_HAS_MEDIATEK_MRV55_UART_ENABLED
+	help
+	  create driver to handle MT81xx SCP specific UART features.

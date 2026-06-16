@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Mediatek
+# SPDX-License-Identifier: Apache-2.0
+
+description: MediaTek MRV55 UART
+
+compatible: "mediatek,mrv55-uart"
+
+include: uart-controller.yaml
+
+properties:
+  reg:
+    required: true
+  clock-frequency:
+    type: int
+    required: true
+    description: Input clock frequency for the UART baudrate generator
