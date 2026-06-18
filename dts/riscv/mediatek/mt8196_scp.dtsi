@@ -65,4 +65,11 @@
 		device_type = "memory";
 		reg = <0x0 0x360000>;
 	};
+
+	ipi: ipi@70050000 {
+		compatible = "mediatek,mtk-scp-ipm";
+		reg = <0x70050000 0x1000>;
+		interrupt-parent = <&intc>;
+		interrupts = <0 0 4>;
+	};
 };
