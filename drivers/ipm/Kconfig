@@ -63,6 +63,13 @@ config XLNX_IPI
 	  Inter Processor Interrupt driver for AMD-Xilinx
 	  platforms such as ZynqMP Ultrascale+.
 
+config IPM_MTK_SCP
+	bool "MediaTek SCP IPM driver"
+	default y
+	depends on DT_HAS_MEDIATEK_MTK_SCP_IPM_ENABLED
+	help
+	  Inter Processor Message driver for MediaTek SCP.
+
 config IPM_MBOX
 	bool "IPM over MBOX driver"
 	default y
