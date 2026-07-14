@@ -1,0 +1,16 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+
+/dts-v1/;
+
+#include <mediatek/mt8196_scp.dtsi>
+
+/ {
+	model = "MediaTek MT8196 SCP";
+	compatible = "mediatek,mt8196-scp";
+
+	chosen {
+		zephyr,sram = &ram0;
+		zephyr,console = &uart0;
+		zephyr,shell-uart = &uart0;
+	};
+};

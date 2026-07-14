@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_MT8196_SCP
+	select SOC_MT8196_SCP
