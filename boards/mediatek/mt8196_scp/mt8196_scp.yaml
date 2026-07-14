@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Mediatek
+# SPDX-License-Identifier: Apache-2.0
+
+identifier: mt8196_scp
+name: MediaTek MT8196 SCP
+type: mcu
+arch: riscv
+toolchain:
+  - zephyr
+ram: 3456
+testing:
+  ignore_tags:
+    - net
+    - bluetooth
+vendor: mediatek
